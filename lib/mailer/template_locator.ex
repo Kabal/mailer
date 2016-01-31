@@ -25,7 +25,8 @@ defmodule Mailer.Template.Locator do
   end
 
   defp maybe_locate(template_name, country_code, ext) do
-    template_location = Application.get_env(:mailer, :templates)
+    template_location = "#{:code.priv_dir(Application.get_env(:mailer, :app))}"
+      |> Path.join(Application.get_env(:mailer, :templates))
       |> Path.join(template_name)            
       |> Path.join(country_code)             
       |> Path.join("#{template_name}#{ext}")     
@@ -39,3 +40,4 @@ defmodule Mailer.Template.Locator do
     end
   end
 end
+
